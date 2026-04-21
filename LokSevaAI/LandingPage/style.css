@@ -1,0 +1,355 @@
+:root {
+    --primary-blue: #000088;
+    --smog-gradient: radial-gradient(circle, rgba(255, 255, 255, 1) 0%, rgba(240, 240, 240, 1) 50%, rgba(220, 220, 220, 1) 100%);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #ffffff;
+    background-image:
+        radial-gradient(at 0% 0%, hsla(210, 100%, 95%, 1) 0, transparent 50%),
+        radial-gradient(at 50% 0%, hsla(225, 100%, 98%, 1) 0, transparent 50%),
+        radial-gradient(at 100% 0%, hsla(210, 100%, 95%, 1) 0, transparent 50%),
+        radial-gradient(at 50% 50%, hsla(210, 100%, 99%, 1) 0, transparent 50%),
+        radial-gradient(at 0% 100%, hsla(210, 100%, 95%, 1) 0, transparent 50%),
+        radial-gradient(at 100% 100%, hsla(210, 100%, 95%, 1) 0, transparent 50%);
+    font-family: 'Crimson Pro', 'Times New Roman', serif;
+    overflow-x: hidden;
+    color: #333;
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 2rem 4rem;
+    z-index: 1000;
+}
+
+.curved-rect {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 0.8rem 2.5rem;
+    border-radius: 50px;
+    /* More curved as requested */
+    font-family: inherit;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.curved-rect:hover {
+    transform: translateY(-3px);
+    background: white;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+}
+
+.section {
+    height: 100vh;
+    width: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* Page 1: Parliament */
+.bg-wrapper {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: -1;
+}
+
+#parliament-img {
+    width: 80%;
+    max-width: 1200px;
+    opacity: 0.15;
+    filter: grayscale(100%);
+    transform: scale(1);
+    transition: none;
+}
+
+.project-name {
+    font-size: 12vw;
+    font-weight: 700;
+    letter-spacing: 2rem;
+    color: #111;
+    z-index: 2;
+    text-transform: uppercase;
+}
+
+/* Ashok Chakra Global (Remove previous rolling behavior) */
+.rolling-container {
+    display: none;
+    /* Removed global roll, moved to Page 2 overlay */
+}
+
+#ashok-chakra {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+
+/* Page 2: Mac UI */
+/* Page 2: Mac UI */
+#page2 {
+    background: #ffffff;
+    justify-content: flex-end;
+    padding-right: 5%;
+    display: flex;
+    align-items: center;
+}
+
+/* Ashok Chakra on the Left of Page 2 */
+.chakra-page-container {
+    position: absolute;
+    left: 8%;
+    width: 350px;
+    height: 350px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0.8;
+}
+
+.rotating-chakra {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.mac-container {
+    width: 60%;
+    max-width: 900px;
+    opacity: 1;
+    /* Handled by GSAP if needed, but let's keep it visible or hidden as per project requirements */
+    transform: none;
+    /* Reset individual transform */
+}
+
+.mac-window {
+    position: relative;
+    background: #0d1117;
+    backdrop-filter: blur(20px);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 50px 100px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    width: 100%;
+}
+
+.mac-header {
+    background: #161b22;
+    padding: 1rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px solid #30363d;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.red {
+    background: #ff5f56;
+}
+
+.yellow {
+    background: #ffbd2e;
+}
+
+.green {
+    background: #27c93f;
+}
+
+.mac-title {
+    color: #8b949e;
+    font-size: 0.8rem;
+    margin-left: auto;
+    font-weight: 500;
+}
+
+.mac-chat-content {
+    padding: 3rem;
+    min-height: 500px;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.chat-message {
+    display: flex;
+    width: 100%;
+    opacity: 0;
+    /* Animated in JS */
+}
+
+.chat-message.user {
+    justify-content: flex-end;
+    transform: translateX(50px);
+    /* Initial state for panning from right */
+}
+
+.chat-message.assistant {
+    justify-content: flex-start;
+    transform: translateX(-50px);
+    /* Initial state for panning from left */
+}
+
+.bubble {
+    max-width: 80%;
+    padding: 1rem 1.5rem;
+    border-radius: 15px;
+    font-size: 1rem;
+    line-height: 1.5;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.user .bubble {
+    background: #1f6feb;
+    color: white;
+    border-bottom-right-radius: 2px;
+}
+
+.assistant .bubble {
+    background: #21262d;
+    color: #e6edf3;
+    border-bottom-left-radius: 2px;
+    border: 1px solid #30363d;
+}
+
+.tech-goals-list {
+    list-style: none;
+    padding: 0;
+}
+
+.tech-goals-list li {
+    margin-bottom: 0.8rem;
+    opacity: 0;
+    /* Animated in JS */
+    transform: translateY(10px);
+}
+
+/* Ashok Chakra Center Overlay */
+.chat-chakra-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px;
+    height: 200px;
+    z-index: 10;
+    pointer-events: none;
+    opacity: 0.15;
+    /* High-end subtle overlay */
+}
+
+.rotating-chakra {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.1));
+}
+
+/* Page 3: About Us */
+#page3 {
+    background: #ffffff;
+    flex-direction: column;
+}
+
+.about-title {
+    font-size: 8rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: #111;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+}
+
+.footer-buttons {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    margin-bottom: 5rem;
+}
+
+.developed-by {
+    font-size: 1.8rem;
+    color: #444;
+    letter-spacing: 0.6rem;
+    text-transform: uppercase;
+    font-family: 'Crimson Pro', serif;
+    margin-top: 5rem;
+    opacity: 0.8;
+}
+
+.developed-by b {
+    color: #000;
+    font-weight: 700;
+}
+
+/* Page 4: Login */
+#page4 {
+    background: #000;
+    color: white;
+}
+
+.login-container {
+    text-align: center;
+    max-width: 600px;
+}
+
+.login-container h1 {
+    font-size: 5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    background: linear-gradient(180deg, #fff 0%, #666 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.login-container p {
+    font-size: 1.8rem;
+    color: #888;
+    margin-bottom: 4rem;
+}
+
+.google-login-large {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    font-size: 1.4rem;
+    padding: 1.5rem 4rem;
+    background: white;
+    color: black;
+    border: none;
+    border-radius: 60px;
+    margin: 0 auto;
+    font-weight: 600;
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.google-login-large:hover {
+    transform: scale(1.05);
+    box-shadow: 0 20px 40px rgba(255, 255, 255, 0.1);
+}

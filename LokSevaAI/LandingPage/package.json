@@ -1,0 +1,12 @@
+{
+  "name": "yojanaai-landing-page",
+  "version": "1.0.0",
+  "description": "Landing page server for YojanaAI",
+  "main": "index.html",
+  "scripts": {
+    "start": "serve -p 5500"
+  },
+  "dependencies": {
+    "serve": "^14.2.1"
+  }
+}
